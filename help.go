@@ -107,16 +107,23 @@ func DefaultAppComplete(c *Context) {
 }
 
 // Prints help for the given command
-func ShowCommandHelp(c *Context, command string) {
-	for _, c := range c.App.Commands {
+func ShowCommandHelp(ctx *Context, command string) {
+	for _, c := range ctx.App.Commands {
 		if c.HasName(command) {
-			HelpPrinter(CommandHelpTemplate, c)
+			commandWithApp := struct {
+				App *App
+				Command
+			}{
+				App:     ctx.App,
+				Command: c,
+			}
+			HelpPrinter(CommandHelpTemplate, commandWithApp)
 			return
 		}
 	}
 
-	if c.App.CommandNotFound != nil {
-		c.App.CommandNotFound(c, command)
+	if ctx.App.CommandNotFound != nil {
+		ctx.App.CommandNotFound(ctx, command)
 	} else {
 		fmt.Printf("No help topic for '%v'\n", command)
 	}
