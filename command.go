@@ -14,6 +14,8 @@ type Command struct {
 	ShortName string
 	// A short description of the usage of this command
 	Usage string
+	// Option and arguments specification
+	Synopsis string
 	// A longer explanation of how the command works
 	Description string
 	// The function to call when checking for bash command completions
@@ -60,7 +62,7 @@ func (c Command) Run(ctx *Context) error {
 	}
 
 	var err error
-	if firstFlagIndex > -1 && !c.SkipFlagParsing{
+	if firstFlagIndex > -1 && !c.SkipFlagParsing {
 		args := ctx.Args()
 		regularArgs := args[1:firstFlagIndex]
 		flagArgs := args[firstFlagIndex:]

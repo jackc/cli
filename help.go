@@ -13,7 +13,7 @@ import (
 var AppHelpTemplate = `NAME:
    {{.Name}} - {{.Usage}}
 
-USAGE:
+SYNOPSIS:
    {{.Name}} [global options] command [command options] [arguments...]
 
 VERSION:
@@ -33,8 +33,8 @@ GLOBAL OPTIONS:
 var CommandHelpTemplate = `NAME:
    {{.Name}} - {{.Usage}}
 
-USAGE:
-   {{.App.Name}} {{.Name}} [command options] [arguments...]
+SYNOPSIS:
+   {{.App.Name}} {{.Name}} {{.Synopsis}}
 
 DESCRIPTION:
    {{.Description}}
@@ -50,7 +50,7 @@ OPTIONS:
 var SubcommandHelpTemplate = `NAME:
    {{.Name}} - {{.Usage}}
 
-USAGE:
+SYNOPSIS:
    {{.Name}} [global options] command [command options] [arguments...]
 
 COMMANDS:
